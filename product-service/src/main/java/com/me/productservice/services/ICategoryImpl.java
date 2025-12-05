@@ -1,6 +1,6 @@
 package com.me.productservice.services;
 
-import com.me.productservice.entites.Category;
+import com.me.productservice.entities.Category;
 import com.me.productservice.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 

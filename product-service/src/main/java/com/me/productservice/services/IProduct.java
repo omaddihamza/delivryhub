@@ -1,6 +1,6 @@
 package com.me.productservice.services;
 
-import com.me.productservice.entites.Product;
+import com.me.productservice.entities.Product;
 
 import java.util.List;
 

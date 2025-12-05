@@ -1,4 +1,4 @@
-package com.me.productservice.entites;
+package com.me.productservice.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
