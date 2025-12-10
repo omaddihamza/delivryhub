@@ -7,11 +7,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor @Builder
 @ToString
 public class Product {
     @Id
