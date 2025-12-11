@@ -1,10 +1,8 @@
 package com.me.deliveryservice.entities;
 
 import com.me.deliveryservice.enums.Status;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.me.deliveryservice.model.Order;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -15,4 +13,6 @@ public class Deliverie {
     private long order_id;
     private long livreur_id;
     private Status status;
+    @Transient
+    private Order order;
 }
