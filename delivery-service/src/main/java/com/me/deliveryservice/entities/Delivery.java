@@ -7,11 +7,12 @@ import lombok.*;
 
 @Entity
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor @Builder @ToString
-public class Deliverie {
+public class Delivery {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private long order_id;
-    private long livreur_id;
+    private long delivery_person_id;
+    @Enumerated(EnumType.STRING)
     private Status status;
     @Transient
     private Order order;
