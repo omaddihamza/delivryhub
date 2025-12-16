@@ -15,7 +15,7 @@ public class GetewayServiceApplication {
 	}
 
 	@Bean
-	DiscoveryClientRouteDefinitionLocator discoveryClientRouteDefinitionLocator(ReactiveDiscoveryClient discoveryClient, DiscoveryLocatorProperties properties) {
+	public DiscoveryClientRouteDefinitionLocator discoveryClientRouteDefinitionLocator(ReactiveDiscoveryClient discoveryClient, DiscoveryLocatorProperties properties) {
       return new DiscoveryClientRouteDefinitionLocator(discoveryClient, properties);
 	}
 
