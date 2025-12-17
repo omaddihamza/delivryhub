@@ -4,11 +4,11 @@ import com.me.authservice.entities.AppRole;
 import com.me.authservice.entities.AppUser;
 import com.me.authservice.repository.AppRoleRepository;
 import com.me.authservice.repository.AppUserRepository;
-import jakarta.persistence.ManyToMany;
 import jakarta.transaction.Transactional;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -18,6 +18,7 @@ public class IAccountServiceImpl implements IAccountService {
     private final AppUserRepository appUserRepository;
     private final AppRoleRepository appRoleRepository;
 
+
     public IAccountServiceImpl(AppUserRepository appUserRepository, AppRoleRepository appRoleRepository) {
         this.appUserRepository = appUserRepository;
         this.appRoleRepository = appRoleRepository;
@@ -25,12 +26,19 @@ public class IAccountServiceImpl implements IAccountService {
 
     @Override
     public AppUser addAccount(AppUser appUser) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String username = appUser.getUsername();
         AppUser user = appUserRepository.findByUsername(username);
         if (user != null) {
            throw new RuntimeException("User already exists");
         }
-        return appUserRepository.save(appUser);
+        AppUser newUser = AppUser.builder()
+                .username(username)
+                .email(appUser.getEmail())
+                .password(passwordEncoder.encode(appUser.getPassword()))
+                .createdAt(appUser.getCreatedAt())
+                .build();
+        return appUserRepository.save(newUser);
     }
 
     @Override
