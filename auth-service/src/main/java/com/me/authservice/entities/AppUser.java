@@ -3,6 +3,7 @@ package com.me.authservice.entities;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 import java.util.Collection;
@@ -23,5 +24,7 @@ public class AppUser {
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<AppRole> appRoles;
+    @CreationTimestamp
+    @Column(updatable = false)
     private Timestamp createdAt;
 }

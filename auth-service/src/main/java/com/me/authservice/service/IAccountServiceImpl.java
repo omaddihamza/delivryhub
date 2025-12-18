@@ -36,7 +36,6 @@ public class IAccountServiceImpl implements IAccountService {
                 .username(username)
                 .email(appUser.getEmail())
                 .password(passwordEncoder.encode(appUser.getPassword()))
-                .createdAt(appUser.getCreatedAt())
                 .build();
         return appUserRepository.save(newUser);
     }
