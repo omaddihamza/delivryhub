@@ -1,5 +1,6 @@
 package com.me.authservice.web;
 
+import com.me.authservice.dto.RegisterRequest;
 import com.me.authservice.entities.AppRole;
 import com.me.authservice.entities.AppUser;
 import com.me.authservice.service.IAccountService;
@@ -16,7 +17,7 @@ public class AccountController {
     }
 
     @PostMapping("/account")
-    public AppUser addAccount(@RequestBody AppUser appUser) {
+    public AppUser addAccount(@RequestBody RegisterRequest appUser) {
         return accountService.addAccount(appUser);
     }
 

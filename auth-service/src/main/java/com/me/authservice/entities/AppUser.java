@@ -6,6 +6,7 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
+import java.util.ArrayDeque;
 import java.util.Collection;
 
 @Entity
@@ -23,7 +24,8 @@ public class AppUser {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
-    private Collection<AppRole> appRoles;
+    @Builder.Default
+    private Collection<AppRole> appRoles = new ArrayDeque<>();
     @CreationTimestamp
     @Column(updatable = false)
     private Timestamp createdAt;

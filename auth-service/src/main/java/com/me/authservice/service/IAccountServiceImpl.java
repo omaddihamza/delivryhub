@@ -1,5 +1,6 @@
 package com.me.authservice.service;
 
+import com.me.authservice.dto.RegisterRequest;
 import com.me.authservice.entities.AppRole;
 import com.me.authservice.entities.AppUser;
 import com.me.authservice.repository.AppRoleRepository;
@@ -9,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayDeque;
 import java.util.List;
 
 @Service
@@ -25,18 +27,23 @@ public class IAccountServiceImpl implements IAccountService {
     }
 
     @Override
-    public AppUser addAccount(AppUser appUser) {
+    public AppUser addAccount(RegisterRequest request) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String username = appUser.getUsername();
+        String username = request.getUsername();
         AppUser user = appUserRepository.findByUsername(username);
         if (user != null) {
            throw new RuntimeException("User already exists");
         }
         AppUser newUser = AppUser.builder()
                 .username(username)
-                .email(appUser.getEmail())
-                .password(passwordEncoder.encode(appUser.getPassword()))
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
                 .build();
+        AppRole defaulatRole = appRoleRepository.findByRoleName(request.getRole());
+        if (defaulatRole == null) {
+            throw new RuntimeException("it is not role");
+        }
+        newUser.getAppRoles().add(defaulatRole);
         return appUserRepository.save(newUser);
     }
 
